@@ -30,11 +30,12 @@ class RDSStack(core.Stack):
         my_sql = rds.DatabaseInstance(
                 self, "RDS",
                 master_username="test",
-                engine_version="8.0.16",
-                engine=rds.DatabaseInstanceEngine.MYSQL,
+                engine=rds.DatabaseInstanceEngine.mysql(
+                    version=rds.MysqlEngineVersion.VER_8_0_16
+                ),
                 vpc=props['vpc'],
                 port=3306,
-                instance_class=ec2.InstanceType.of(
+                instance_type=ec2.InstanceType.of(
                     ec2.InstanceClass.MEMORY4,
                     ec2.InstanceSize.LARGE,
                     ),
